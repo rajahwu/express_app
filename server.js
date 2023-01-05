@@ -1,10 +1,23 @@
 const express = require('express');
+const hbs = require('hbs');
+
 require('dotenv').config();
+
 const port = process.env.PORT || 5000;
 const app = express();
 
+const demo = {
+    name: 'Rajah',
+    age: 30
+}
+
+app.set('view engine', 'hbs');
+app.set('views', './views');
+
 app.get('/', (req, res) => {
-    res.send('Home');
+    // res.send('Home');
+    // res.render('demo');
+    res.render('dynamic', {demo : demo})
 })
 
 app.get('/about', (req,res) => {
@@ -35,3 +48,4 @@ app.use((err, req, res, next) => {
 
 
 app.listen(port, () => console.log(`App in running on port ${port}`))
+
